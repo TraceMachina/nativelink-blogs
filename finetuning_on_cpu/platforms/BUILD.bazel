@@ -1,0 +1,12 @@
+platform(
+    name = "python-remote",
+    constraint_values = [
+        "@platforms//os:linux",
+        "@platforms//cpu:x86_64",
+    ],
+    exec_properties = {
+        "OSFamily": "Linux",
+        "ISA": "x86-64",
+        "container-image": "docker.io/evaanahmed2001/python-bazel-env@sha256:8de13199d587964b218c0b671272b42031cf4944b2f426e6eee7d7542802bf7c",
+    },
+)

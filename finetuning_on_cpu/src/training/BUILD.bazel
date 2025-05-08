@@ -1,0 +1,27 @@
+load("@rules_python//python:defs.bzl", "py_test")
+
+exports_files(
+    ["train_model.py"],
+    visibility = ["//visibility:public"],  # Makes it visible to all packages
+)
+
+py_test(
+    name = "training_test",
+    size = "large",
+    srcs = ["train_model.py"],
+    main = "train_model.py",
+    # IMPORTANT: Model training is irreproducible. We can use NativeLink to
+    #            speed up the build, but we can't "reuse" a cached model as
+    #            every training run will yield different results. The `no-cache`
+    #            flag here prevents any sort of caching while still allowing for
+    #            remote execution in Nativelink's distributed infrastructure.
+    tags = ["no-cache"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@pypi//accelerate",
+        "@pypi//datasets",
+        "@pypi//psutil",
+        "@pypi//torch",
+        "@pypi//transformers",
+    ],
+)

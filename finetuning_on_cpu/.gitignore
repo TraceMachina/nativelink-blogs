@@ -3,6 +3,4 @@ bazel-finetune-repo
 bazel-out
 bazel-bin
 bazel-testlogs
-.bazelrc
 .env
-MODULE.bazel.lock

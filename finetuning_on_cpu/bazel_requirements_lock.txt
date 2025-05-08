@@ -155,3 +155,19 @@ python-dotenv==1.1.0
     # for loading env variables
 scipy==1.15.2
     # for torch to get embeddings
+
+# Manual adjusted below.
+nvidia-cublas-cu12==12.9.0.13
+nvidia-cuda-cupti-cu12==12.9.19
+nvidia-cuda-nvrtc-cu12==12.9.41
+nvidia-cuda-runtime-cu12==12.9.37
+nvidia-cudnn-cu12==9.10.0.56
+nvidia-cufft-cu12==11.4.0.6
+nvidia-curand-cu12==10.3.10.19
+nvidia-cusolver-cu12==11.7.4.40
+nvidia-cusparse-cu12==12.5.9.5
+nvidia-cusparselt-cu12==0.7.1
+nvidia-nccl-cu12==2.26.5
+nvidia-nvjitlink-cu12==12.9.41
+nvidia-nvtx-cu12==12.9.19
+triton==3.3.0
