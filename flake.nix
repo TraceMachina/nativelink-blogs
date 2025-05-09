@@ -69,6 +69,7 @@
           packages = [
             # Development tools
             pkgs.git
+            pkgs.ruff
 
             # Build dependencies
             # Bazel installed by Bazelisk.

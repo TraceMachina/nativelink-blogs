@@ -1,0 +1,18 @@
+load("@bazel_skylib//rules:native_binary.bzl", "native_test")
+load("@rules_python//python/uv:lock.bzl", "lock")
+
+exports_files(
+    ["python_provider.sh"],
+    visibility = ["//visibility:public"],
+)
+
+lock(
+    name = "requirements",
+    srcs = ["pyproject.toml"],
+    out = "requirements.lock",
+)
+
+native_test(
+    name = "requirements_test",
+    src = "requirements.update",
+)
