@@ -1,0 +1,32 @@
+# Pick up system specific configs.
+common --enable_platform_specific_config
+
+# Don't inherit PATH and LD_LIBRARY_PATH.
+build --incompatible_strict_action_env
+
+# Forbid network access unless explicitly enabled.
+build --sandbox_default_allow_network=false
+
+# Use correct runfile locations.
+build --nolegacy_external_runfiles
+
+# Enable sandboxing for exclusive tests like GPU performance tests.
+test --incompatible_exclusive_test_sandboxed
+
+# Simulate rules_python's initialization with a script.
+common --@rules_python//python/config_settings:bootstrap_impl=script
+
+# Remote optimizations.
+build --remote_download_minimal
+
+# Smaller profiling. Careful. Disabling this might explode remote cache usage.
+build --slim_profile
+build --experimental_profile_include_target_label
+build --noexperimental_profile_include_primary_output
+
+# Use the container image specified in `platforms/BUILD.bazel`.
+build --extra_execution_platforms=@//platforms:python-remote
+build --extra_toolchains=@zig_sdk//toolchain:linux_amd64_musl
+
+# Add user specific flags.
+try-import %workspace%/user.bazelrc
