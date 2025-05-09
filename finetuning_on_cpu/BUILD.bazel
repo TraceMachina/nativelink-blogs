@@ -1,0 +1,19 @@
+load("@rules_python//python/uv:lock.bzl", "lock")
+
+exports_files(
+    ["python_provider.sh"],
+    visibility = ["//visibility:public"],
+)
+
+[
+    lock(
+        name = "requirements_{}".format(os),
+        srcs = ["pyproject.toml"],
+        out = "requirements_{}.lock".format(os),
+        build_constraints = ["@platforms//os:{}".format(os)],
+    )
+    for os in [
+        "linux",
+        "macos",
+    ]
+]
