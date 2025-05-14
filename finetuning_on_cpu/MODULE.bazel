@@ -23,10 +23,8 @@ pip.parse(
     },
     hub_name = "pypi",
     python_version = "3.13",
-    # This file may be regenerated via `bazel run //:requirements_macos.update`.
-    requirements_darwin = "//:requirements_macos.lock",
-    # This file may be regenerated via `bazel run //:requirements_linux.update`.
-    requirements_linux = "//:requirements_linux.lock",
+    # This file may be regenerated via `bazel run //:requirements.update`.
+    requirements_linux = "//:requirements.lock",
 )
 use_repo(pip, "pypi")
 

@@ -25,8 +25,8 @@ build --experimental_profile_include_target_label
 build --noexperimental_profile_include_primary_output
 
 # Use the container image specified in `platforms/BUILD.bazel`.
-build:remote --extra_execution_platforms=@//platforms:python-remote
-build:remote --extra_toolchains=@zig_sdk//toolchain:linux_amd64_musl
+build --extra_execution_platforms=@//platforms:python-remote
+build --extra_toolchains=@zig_sdk//toolchain:linux_amd64_musl
 
 # Add user specific flags.
 try-import %workspace%/user.bazelrc
