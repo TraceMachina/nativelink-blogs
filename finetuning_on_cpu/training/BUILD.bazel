@@ -9,6 +9,10 @@ py_test(
     name = "training",
     size = "large",
     srcs = ["main.py"],
+    exec_compatible_with = [
+        "@platforms//os:linux",
+        "@platforms//cpu:x86_64",
+    ],
     main = "main.py",
     # WARNING: While seeding might make training scientifically reproducible,
     #          results will almost certainly not be perfectly reproducible in

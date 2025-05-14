@@ -2,6 +2,9 @@
 
 An example project for training a machine learning model with Bazel.
 
+> [!NOTE]
+> This example only supports `x86_64-linux`.
+
 ## ❄️ Setup
 
 1. Either have Bazelisk installed or enter the nix flake from this repository.
@@ -31,7 +34,7 @@ Now run a remote invocation. The first time you do this it'll be slow (~15min)
 as the runner needs to spin up and fetch the various toolchains:
 
 ```bash
-bazel test training --config=remote --test_output=all
+bazel test training --test_output=all
 ```
 
 Run the above command a second time. Since the runner is now warm it'll
@@ -44,14 +47,8 @@ The dependencies for this project are tracked in `pyproject.toml` and locked in
 regenerate the lockfiles:
 
 ```bash
-# On linux
-bazel run //:requirements_linux.update
-
-# On macos
-bazel run //:requirements_macos.update
+bazel run //:requirements.update
 ```
-
-On darwin you might have to disable remote execution temporarily for this.
 
 ## 🧹 Fixing formatting and linting
 
