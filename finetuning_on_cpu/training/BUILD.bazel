@@ -1,0 +1,47 @@
+load("@rules_python//python:defs.bzl", "py_test")
+
+exports_files(
+    ["train_model.py"],
+    visibility = ["//visibility:public"],  # Makes it visible to all packages
+)
+
+py_test(
+    name = "training",
+    size = "large",
+    srcs = ["main.py"],
+    main = "main.py",
+    # WARNING: While seeding might make training scientifically reproducible,
+    #          results will almost certainly not be perfectly reproducible in
+    #          the bit-by-bit sense. This means that we can use NativeLink to
+    #          speed up the build, but we can't "reuse" a cached model. The
+    #          `no-cache` and `external` flags here prevent any sort of caching
+    #          while still allowing for remote execution in NativeLink's
+    #          distributed infrastructure.
+    #
+    #          While it is technically possible to train in the bit-by-bit
+    #          reproducible sense, this generally comes with such high
+    #          performance penalties that it's usually unfeasible unless a
+    #          specific compliance requirement mandates it. In such a case you
+    #          could cache this test after extensive validation that independent
+    #          runs certainly yield bit-by-bit identical results.
+    #
+    #          It's also possible to disable NativeLink's internal periodic
+    #          correctness checks to brute-force the reuse of irreproducible
+    #          artifacts. You'll lose any correctness guarantees that NativeLink
+    #          provides, so we don't recommend it and you're on your own if you
+    #          do that. But if really know what you're doing and skipping
+    #          training runs entirely is more valuable to you we also can't stop
+    #          you from ignoring this disclaimer ;)
+    tags = [
+        "external",
+        "no-cache",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@pypi//accelerate",  # TODO(aaronmondal): This shouldn't be necessary.
+        "@pypi//datasets",
+        "@pypi//numpy",
+        "@pypi//torch",
+        "@pypi//transformers",
+    ],
+)
